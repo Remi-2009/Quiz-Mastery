@@ -6,7 +6,7 @@ const questions = [
     {
         question: "If the mass of an object is 5kg on earth what would be it's mass in space:",
         options: ["5kg", "0kg", "-5kg", "2kg"],
-        correct: 1
+        correct: 0
     },
     {
         question: "Who is the primary scientist responsible for organizing the Modern Periodic Table used today?",
