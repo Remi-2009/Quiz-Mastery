@@ -4,8 +4,8 @@
 
 const questions = [
     {
-        question: "What is the exact value of under root -5^2",
-        options: ["-5", "5", "5 and -5", "It's imaginary...just like my peace of mind"],
+        question: "If the mass of an object is 5kg on earth what would be it's mass in space:",
+        options: ["5kg", "0kg", "-5kg", "2kg"],
         correct: 1
     },
     {
