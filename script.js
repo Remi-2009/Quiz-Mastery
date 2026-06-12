@@ -38,11 +38,11 @@ const questions = [
         correct: 1
     },
     {
-        question: "An observer watches a spaceship pass by at nearly the speed of light. From the theoretical framework of special relativity, which statement correctly describes what the observer measures regarding the spaceship's clock??",
+        question: "An observer watches a spaceship pass by at nearly the speed of light. From the theoretical framework of special relativity, which statement correctly describes what the observer measures regarding the spaceship's clock?",
         options: [
          "The clock stops entirely from the observer's perspective.",
            "The clocks run at identical rates because time is a universal absolute.",
-           "The spaceship's clock appears to run faster than the observer's own clock.,
+           "The spaceship's clock appears to run faster than the observer's own clock.",
            "The spaceship's clock appears to run slower than the observer's own clock."
         ],
         correct: 3
