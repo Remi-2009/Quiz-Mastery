@@ -4,39 +4,49 @@
 
 const questions = [
     {
-        question: "Which planet is known as the Red Planet?",
-        options: ["Earth", "Mars", "Venus", "Jupiter"],
+        question: "What is the exact value of under root -5^2",
+        options: ["-5", "5", "5 and -5", "It's imaginary...just like my peace of mind"],
         correct: 1
     },
     {
-        question: "Who developed the theory of relativity?",
+        question: "Who is the primary scientist responsible for organizing the Modern Periodic Table used today?",
         options: [
-            "Isaac Newton",
-            "Nikola Tesla",
+           
+            "Dmitri Mendeleev",
+            "Ernest Rutherford",
             "Albert Einstein",
-            "Galileo Galilei"
+            "Henry Moseley"
         ],
-        correct: 2
+        correct: 3
     },
     {
-        question: "What is the value of π rounded to two decimal places?",
-        options: ["3.12", "3.14", "3.18", "3.16"],
+        question: "A jacket's price is increased by 20%. A week later, the store puts the jacket on sale for 20% off. How does the final price compare to the original price?",
+        options: ["The final price is higher than the original price", 
+                  "The final price is lower than the original price", 
+                  "The final price is exactly the same as the original price", 
+                  "Why should I care about that jacket?"],
         correct: 1
     },
     {
-        question: "Which ancient civilization built the pyramids?",
+        question: "If a massive star explodes in deep space, how loud would the explosion sound to a spaceship hovering nearby?",
         options: [
-            "Romans",
-            "Greeks",
-            "Egyptians",
-            "Mayans"
+            "A faint, low-frequency rumble",
+            "Completely silent",
+            "It depends on the size of the star",
+            "Incredibly loud, enough to shatter the ship's windows"
         ],
-        correct: 2
+        correct: 1
     },
     {
-        question: "What is the chemical symbol for Gold?",
-        options: ["Ag", "Gd", "Au", "Go"],
-        correct: 2
+        question: "An observer watches a spaceship pass by at nearly the speed of light. From the theoretical framework of special relativity, which statement correctly describes what the observer measures regarding the spaceship's clock??",
+        options: [
+         "The clock stops entirely from the observer's perspective.",
+           "The clocks run at identical rates because time is a universal absolute.",
+           "The spaceship's clock appears to run faster than the observer's own clock.,
+           "The spaceship's clock appears to run slower than the observer's own clock."
+        ],
+        correct: 3
+
     }
 ];
 
