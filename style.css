@@ -11,13 +11,13 @@
 :root {
     --bg: #facc15;
     --card: #fffbeb;
-    --accent: #22d3ee;
-    --accent-hover: #06b6d4;
+    --accent: #f97316;
+    --accent-hover: #ea580c;
     --text: #020617;
     --muted: #94a3b8;
     --correct: #10b981;
     --wrong: #ef4444;
-    --border: #334155;
+    --border: #dc2626;
 }
 
 body {
@@ -99,7 +99,7 @@ h1 {
 .option-btn {
     width: 100%;
     background: #fed7aa;
-    color: white;
+    color: black;
     border: 2px solid transparent;
     padding: 15px;
     border-radius: 12px;
