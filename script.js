@@ -2,7 +2,7 @@
    QUESTIONS
 ========================= */
 
-const questions = [
+const HardQuestions = [
     {
         question: "If the mass of an object is 5kg on earth what would be it's mass in space:",
         options: ["5kg", "0kg", "-5kg", "2kg"],
@@ -51,6 +51,56 @@ const questions = [
     }
 ];
 
+const EasyQuestions = [
+    {
+        question: "If the mass of an object is 5kg on earth what would be it's mass in space:",
+        options: ["5kg", "0kg", "-5kg", "2kg"],
+        correct: 0
+        hint: "Weight and mass are different quantities."
+    },
+    {
+        question: "Who is the primary scientist responsible for organizing the Modern Periodic Table used today?",
+        options: [
+           
+            "Dmitri Mendeleev",
+            "Ernest Rutherford",
+            "Albert Einstein",
+            "Henry Moseley"
+        ],
+        correct: 3
+    },
+    {
+        question: "A jacket's price is increased by 20%. A week later, the store puts the jacket on sale for 20% off. How does the final price compare to the original price?",
+        options: ["The final price is higher than the original price", 
+                  "The final price is lower than the original price", 
+                  "The final price is exactly the same as the original price", 
+                  "Why should I care about that jacket?"],
+        correct: 1
+    },
+    {
+        question: "If a massive star explodes in deep space, how loud would the explosion sound to a spaceship hovering nearby?",
+        options: [
+            "A faint, low-frequency rumble",
+            "Completely silent",
+            "It depends on the size of the star",
+            "Incredibly loud, enough to shatter the ship's windows"
+        ],
+        correct: 1
+    },
+    {
+        question: "An observer watches a spaceship pass by at nearly the speed of light. From the theoretical framework of special relativity, which statement correctly describes what the observer measures regarding the spaceship's clock?",
+        options: [
+         "The clock stops entirely from the observer's perspective.",
+           "The clocks run at identical rates because time is a universal absolute.",
+           "The spaceship's clock appears to run faster than the observer's own clock.",
+           "The spaceship's clock appears to run slower than the observer's own clock."
+        ],
+        correct: 3
+
+    }
+];
+
+
 /* =========================
    ELEMENTS
 ========================= */
@@ -87,6 +137,8 @@ let score = 0;
 let timeLeft = 15;
 let timer;
 let acceptingAnswers = true;
+let activeQuestions = [];
+let gameMode = "";
 
 /* =========================
    SCREEN MANAGEMENT
@@ -103,9 +155,23 @@ function showScreen(screen) {
 /* =========================
    QUIZ START
 ========================= */
+easyBtn.addEventListener("click", () => {
 
-startBtn.addEventListener("click", startQuiz);
-playAgainBtn.addEventListener("click", startQuiz);
+    gameMode = "easy";
+    activeQuestions = easyQuestions;
+
+    startQuiz();
+});
+
+hardBtn.addEventListener("click", () => {
+
+    gameMode = "hard";
+    activeQuestions = hardQuestions;
+
+    startQuiz();
+});
+/*startBtn.addEventListener("click", startQuiz);
+playAgainBtn.addEventListener("click", startQuiz);*/
 
 function startQuiz() {
 
@@ -129,15 +195,15 @@ function loadQuestion() {
 
     acceptingAnswers = true;
 
-    if (currentQuestion >= questions.length) {
+    if (currentQuestion >= activeQuestions.length) {
         endQuiz();
         return;
     }
 
-    const q = questions[currentQuestion];
+    const q = activeQuestions[currentQuestion];
 
     questionCounter.textContent =
-        `Question ${currentQuestion + 1} of ${questions.length}`;
+        `Question ${currentQuestion + 1} of ${activeQuestions.length}`;
 
     questionText.textContent = q.question;
 
@@ -219,7 +285,7 @@ function handleAnswer(selectedIndex) {
 
     clearInterval(timer);
 
-    const q = questions[currentQuestion];
+    const q = activeQuestions[currentQuestion];
 
     const buttons =
         document.querySelectorAll(".option-btn");
@@ -255,7 +321,7 @@ function handleAnswer(selectedIndex) {
 
 function revealCorrectAnswer() {
 
-    const q = questions[currentQuestion];
+    const q = activeQuestions[currentQuestion];
 
     const buttons =
         document.querySelectorAll(".option-btn");
@@ -278,17 +344,17 @@ function endQuiz() {
     finalScore.textContent = score;
 
     const percentage =
-        (score / (questions.length * 100)) * 100;
+        (score / (activeQuestions.length * 100)) * 100;
 
     if (percentage >= 80) {
         performanceMessage.textContent =
-            "🌟 Excellent! Outstanding performance!";
+            "🌟Outstanding performance!";
     } else if (percentage >= 50) {
         performanceMessage.textContent =
             "👍 Good Job! You're doing well.";
     } else {
         performanceMessage.textContent =
-            "📚 Keep Practicing! You'll improve with time.";
+            "📚 Keep Practicing! You'll improve with time...maybe";
     }
 
     renderLeaderboard();
