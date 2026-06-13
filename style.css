@@ -124,7 +124,15 @@ h1 {
 .option-btn:disabled {
     cursor: not-allowed;
 }
+.hint-btn{
+    margin-top:20px;
+}
 
+#hint-text{
+    margin-top:15px;
+    font-style:italic;
+    color:var(--accent);
+}
 /* =========================
    QUIZ
 ========================= */
