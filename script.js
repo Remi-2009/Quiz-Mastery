@@ -7,6 +7,7 @@ const questions = [
         question: "If the mass of an object is 5kg on earth what would be it's mass in space:",
         options: ["5kg", "0kg", "-5kg", "2kg"],
         correct: 0
+        hint: "Weight and mass are different quantities."
     },
     {
         question: "Who is the primary scientist responsible for organizing the Modern Periodic Table used today?",
@@ -73,6 +74,9 @@ const timerBar = document.getElementById("timer-bar");
 const finalScore = document.getElementById("final-score");
 const performanceMessage = document.getElementById("performance-message");
 const leaderboardList = document.getElementById("leaderboard-list");
+
+const hintBtn = document.getElementById("hint-btn");
+const hintText = document.getElementById("hint-text");
 
 /* =========================
    GAME STATE
@@ -149,6 +153,8 @@ function loadQuestion() {
         button.addEventListener("click", () => {
             if (!acceptingAnswers) return;
             handleAnswer(index);
+        hintText.textContent = "";
+        hintBtn.disabled = false;
         });
 
         optionsContainer.appendChild(button);
@@ -192,6 +198,16 @@ function startTimer() {
 
     }, 1000);
 }
+/*==== HINT BUTTON CLICK ====*/
+hintBtn.addEventListener("click", () => {
+
+    const q = activeQuestions[currentQuestion];
+
+    hintText.textContent = q.hint;
+
+    hintBtn.disabled = true;
+});
+
 
 /* =========================
    ANSWER HANDLING
