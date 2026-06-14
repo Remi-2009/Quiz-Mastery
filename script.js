@@ -139,7 +139,10 @@ let timer;
 let acceptingAnswers = true;
 let activeQuestions = [];
 let gameMode = "";
-
+let globalTime = 60;
+let globalTimer;
+let gameMode = "hard";
+// hard | easy | timeattack
 /* =========================
    SCREEN MANAGEMENT
 ========================= */
@@ -227,6 +230,8 @@ function loadQuestion() {
     });
 
     startTimer();
+   /*====  AGAR RUN NA HO TO EK BAAR YAHA INDENTATION CHECK KAR LENA*/
+    if(gameMode === "timeattack") return;  
 }
 
 /* =========================
@@ -361,7 +366,49 @@ function endQuiz() {
 
     showScreen(endScreen);
 }
+/*==== TIME ATTACK =====*/
+timeAttackBtn.addEventListener("click", startTimeAttack);
 
+function startTimeAttack(){
+
+    gameMode = "timeattack";
+
+    activeQuestions = easyQuestions;
+
+    currentQuestion = 0;
+    score = 0;
+
+    showScreen(quizScreen);
+
+    startGlobalTimer();
+
+    loadQuestion();
+}
+/*===== TIME ATTACK TIMER =====*/
+function startGlobalTimer(){
+
+    globalTime = 60;
+
+    clearInterval(globalTimer);
+
+    globalTimer = setInterval(() => {
+
+        globalTime--;
+
+        timerDisplay.textContent = globalTime;
+
+        timerBar.style.width =
+        `${(globalTime/60)*100}%`;
+
+        if(globalTime <= 0){
+
+            clearInterval(globalTimer);
+
+            endTimeAttack();
+        }
+
+    },1000);
+}
 /* =========================
    LEADERBOARD
 ========================= */
@@ -408,4 +455,35 @@ function renderLeaderboard() {
 
         leaderboardList.appendChild(li);
     });
+}
+/*BUTTONS*/
+homeBtn.addEventListener("click", () => {
+
+    showScreen(startScreen);
+});
+
+timeAttackBtnEnd.addEventListener(
+    "click",
+    startTimeAttack
+);
+/* =========================
+   LEADERBOARD TIME ATTACK
+========================= */
+function saveTimeAttackScore(score){
+
+    let scores =
+    JSON.parse(
+        localStorage.getItem("timeAttackScores")
+    ) || [];
+
+    scores.push(score);
+
+    scores.sort((a,b)=>b-a);
+
+    scores = scores.slice(0,5);
+
+    localStorage.setItem(
+        "timeAttackScores",
+        JSON.stringify(scores)
+    );
 }
