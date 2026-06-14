@@ -18,7 +18,8 @@ const HardQuestions = [
             "Albert Einstein",
             "Henry Moseley"
         ],
-        correct: 3
+        correct: 3,
+        hint:"Definitely not Mendeleev."
     },
     {
         question: "A jacket's price is increased by 20%. A week later, the store puts the jacket on sale for 20% off. How does the final price compare to the original price?",
@@ -26,7 +27,8 @@ const HardQuestions = [
                   "The final price is lower than the original price", 
                   "The final price is exactly the same as the original price", 
                   "Why should I care about that jacket?"],
-        correct: 1
+        correct: 1,
+        hint: "The incresed price becomes the original price the next week."
     },
     {
         question: "If a massive star explodes in deep space, how loud would the explosion sound to a spaceship hovering nearby?",
@@ -36,7 +38,8 @@ const HardQuestions = [
             "It depends on the size of the star",
             "Incredibly loud, enough to shatter the ship's windows"
         ],
-        correct: 1
+        correct: 1,
+        hint: "Does sound require a medium to travel?"
     },
     {
         question: "An observer watches a spaceship pass by at nearly the speed of light. From the theoretical framework of special relativity, which statement correctly describes what the observer measures regarding the spaceship's clock?",
@@ -46,58 +49,37 @@ const HardQuestions = [
            "The spaceship's clock appears to run faster than the observer's own clock.",
            "The spaceship's clock appears to run slower than the observer's own clock."
         ],
-        correct: 3
+        correct: 3,
+        hint: "Just kidding! No hint for this one, you're on your own."
 
     }
 ];
 
 const EasyQuestions = [
     {
-        question: "If the mass of an object is 5kg on earth what would be it's mass in space:",
-        options: ["5kg", "0kg", "-5kg", "2kg"],
-        correct: 0,
-        hint: "Weight and mass are different quantities."
+        question: "What is the colour of deoxygenated blood?",
+        options: ["Blue", "Red", "Green", "Cyan"],
+        correct: 1,
+        hint: "What colour does Haemoglobin give?"
     },
     {
-        question: "Who is the primary scientist responsible for organizing the Modern Periodic Table used today?",
-        options: [
-           
-            "Dmitri Mendeleev",
-            "Ernest Rutherford",
-            "Albert Einstein",
-            "Henry Moseley"
-        ],
-        correct: 3
+        question: "How many brains are present in an octopus?",
+        options: ["5","6","7","1"],
+        correct: 2,
+        hint:"What is the largest number here?"
     },
     {
-        question: "A jacket's price is increased by 20%. A week later, the store puts the jacket on sale for 20% off. How does the final price compare to the original price?",
-        options: ["The final price is higher than the original price", 
-                  "The final price is lower than the original price", 
-                  "The final price is exactly the same as the original price", 
-                  "Why should I care about that jacket?"],
-        correct: 1
+        question: "Which or the following has a excetional electronic configuration?",
+        options: ["Na","Cu","Fe","K"],
+        correct: 1,
+        hint: "Which metal does not react with water even at high temperature?"
     },
     {
-        question: "If a massive star explodes in deep space, how loud would the explosion sound to a spaceship hovering nearby?",
-        options: [
-            "A faint, low-frequency rumble",
-            "Completely silent",
-            "It depends on the size of the star",
-            "Incredibly loud, enough to shatter the ship's windows"
-        ],
-        correct: 1
+        question: "SI unit of Temperature?",
+        options: ["Degree Celsius","Degree Fareheight","Kelvin","There aren't any more units..."],
+        correct: 2,
+        hint:"It's not used in a everyday speech."
     },
-    {
-        question: "An observer watches a spaceship pass by at nearly the speed of light. From the theoretical framework of special relativity, which statement correctly describes what the observer measures regarding the spaceship's clock?",
-        options: [
-         "The clock stops entirely from the observer's perspective.",
-           "The clocks run at identical rates because time is a universal absolute.",
-           "The spaceship's clock appears to run faster than the observer's own clock.",
-           "The spaceship's clock appears to run slower than the observer's own clock."
-        ],
-        correct: 3
-
-    }
 ];
 
 
@@ -245,6 +227,7 @@ function loadQuestion() {
     if(gameMode !== "timeattack"){
     startTimer();
 }
+}
     
 /* =========================
    TIMER
@@ -385,10 +368,11 @@ function startTimeAttack(){
 
     gameMode = "timeattack";
 
-    activeQuestions = easyQuestions;
+    activeQuestions = EasyQuestions;
 
     currentQuestion = 0;
     score = 0;
+    gameFinished = false;
 
     showScreen(quizScreen);
 
@@ -489,6 +473,17 @@ function renderLeaderboard() {
 }
 /*BUTTONS*/
 homeBtn.addEventListener("click", () => {
+
+    clearInterval(timer);
+    clearInterval(globalTimer);
+
+    showScreen(startScreen);
+});
+
+homeBtnTA.addEventListener("click", () => {
+
+    clearInterval(timer);
+    clearInterval(globalTimer);
 
     showScreen(startScreen);
 });
