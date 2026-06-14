@@ -6,7 +6,7 @@ const HardQuestions = [
     {
         question: "If the mass of an object is 5kg on earth what would be it's mass in space:",
         options: ["5kg", "0kg", "-5kg", "2kg"],
-        correct: 0
+        correct: 0,
         hint: "Weight and mass are different quantities."
     },
     {
@@ -109,8 +109,14 @@ const startScreen = document.getElementById("start-screen");
 const quizScreen = document.getElementById("quiz-screen");
 const endScreen = document.getElementById("end-screen");
 
-const startBtn = document.getElementById("start-btn");
-const playAgainBtn = document.getElementById("play-again-btn");
+const easyBtn = document.getElementById("easy-btn");
+const hardBtn = document.getElementById("hard-btn");
+const timeAttackBtn = document.getElementById("timeattack-btn");
+const timeAttackBtnEnd = document.getElementById("timeattack-btn-end");
+const homeBtn = document.getElementById("home-btn");
+
+/*const startBtn = document.getElementById("start-btn");
+const playAgainBtn = document.getElementById("play-again-btn");*/
 
 const questionText = document.getElementById("question-text");
 const optionsContainer = document.getElementById("options-container");
@@ -138,7 +144,6 @@ let timeLeft = 15;
 let timer;
 let acceptingAnswers = true;
 let activeQuestions = [];
-let gameMode = "";
 let globalTime = 60;
 let globalTimer;
 let gameMode = "hard";
@@ -161,7 +166,7 @@ function showScreen(screen) {
 easyBtn.addEventListener("click", () => {
 
     gameMode = "easy";
-    activeQuestions = easyQuestions;
+    activeQuestions = EasyQuestions;
 
     startQuiz();
 });
@@ -169,7 +174,7 @@ easyBtn.addEventListener("click", () => {
 hardBtn.addEventListener("click", () => {
 
     gameMode = "hard";
-    activeQuestions = hardQuestions;
+    activeQuestions = HardQuestions;
 
     startQuiz();
 });
@@ -222,8 +227,8 @@ function loadQuestion() {
         button.addEventListener("click", () => {
             if (!acceptingAnswers) return;
             handleAnswer(index);
-        hintText.textContent = "";
-        hintBtn.disabled = false;
+            hintText.textContent = "";
+            hintBtn.disabled = false;
         });
 
         optionsContainer.appendChild(button);
