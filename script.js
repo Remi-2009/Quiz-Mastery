@@ -55,7 +55,7 @@ const EasyQuestions = [
     {
         question: "If the mass of an object is 5kg on earth what would be it's mass in space:",
         options: ["5kg", "0kg", "-5kg", "2kg"],
-        correct: 0
+        correct: 0,
         hint: "Weight and mass are different quantities."
     },
     {
@@ -114,7 +114,7 @@ const hardBtn = document.getElementById("hard-btn");
 const timeAttackBtn = document.getElementById("timeattack-btn");
 const timeAttackBtnEnd = document.getElementById("timeattack-btn-end");
 const homeBtn = document.getElementById("home-btn");
-
+const homeBtnTA = document.getElementById("home-btn-ta");
 /*const startBtn = document.getElementById("start-btn");
 const playAgainBtn = document.getElementById("play-again-btn");*/
 
@@ -134,6 +134,8 @@ const leaderboardList = document.getElementById("leaderboard-list");
 const hintBtn = document.getElementById("hint-btn");
 const hintText = document.getElementById("hint-text");
 
+const timeAttackEndScreen =
+    document.getElementById("timeattack-end-screen");
 /* =========================
    GAME STATE
 ========================= */
@@ -146,6 +148,7 @@ let acceptingAnswers = true;
 let activeQuestions = [];
 let globalTime = 60;
 let globalTimer;
+let gameFinished = false;
 let gameMode = "hard";
 // hard | easy | timeattack
 /* =========================
@@ -202,12 +205,18 @@ function loadQuestion() {
     clearInterval(timer);
 
     acceptingAnswers = true;
-
     if (currentQuestion >= activeQuestions.length) {
+
+    if(gameMode === "timeattack"){
+        endTimeAttack();
+    }
+    else{
         endQuiz();
-        return;
     }
 
+    return;
+}
+   
     const q = activeQuestions[currentQuestion];
 
     questionCounter.textContent =
@@ -233,12 +242,10 @@ function loadQuestion() {
 
         optionsContainer.appendChild(button);
     });
-
+    if(gameMode !== "timeattack"){
     startTimer();
-   /*====  AGAR RUN NA HO TO EK BAAR YAHA INDENTATION CHECK KAR LENA*/
-    if(gameMode === "timeattack") return;  
 }
-
+    
 /* =========================
    TIMER
 ========================= */
@@ -389,6 +396,25 @@ function startTimeAttack(){
 
     loadQuestion();
 }
+
+function endTimeAttack() {
+
+    if(gameFinished) return;
+
+    gameFinished = true;
+
+    clearInterval(globalTimer);
+    clearInterval(timer);
+
+    saveTimeAttackScore(score);
+
+    document.getElementById("ta-score").textContent =
+        `Final Score: ${score}`;
+
+    renderTimeAttackLeaderboard();
+
+    showScreen(timeAttackEndScreen);
+}
 /*===== TIME ATTACK TIMER =====*/
 function startGlobalTimer(){
 
@@ -491,4 +517,33 @@ function saveTimeAttackScore(score){
         "timeAttackScores",
         JSON.stringify(scores)
     );
+}
+function renderTimeAttackLeaderboard() {
+
+    const leaderboard =
+        document.getElementById("ta-leaderboard");
+
+    leaderboard.innerHTML = "";
+
+    const scores =
+        JSON.parse(
+            localStorage.getItem("timeAttackScores")
+        ) || [];
+
+    if(scores.length === 0){
+
+        leaderboard.innerHTML =
+            "<li>No scores yet.</li>";
+
+        return;
+    }
+
+    scores.forEach(score => {
+
+        const li = document.createElement("li");
+
+        li.textContent = `${score} Points`;
+
+        leaderboard.appendChild(li);
+    });
 }
