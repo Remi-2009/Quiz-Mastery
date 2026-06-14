@@ -69,7 +69,7 @@ const EasyQuestions = [
         hint:"What is the largest number here?"
     },
     {
-        question: "Which or the following has a excetional electronic configuration?",
+        question: "Which or the following has a exceptional electronic configuration?",
         options: ["Na","Cu","Fe","K"],
         correct: 1,
         hint: "Which metal does not react with water even at high temperature?"
